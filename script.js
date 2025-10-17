@@ -21,11 +21,19 @@ document.addEventListener('DOMContentLoaded', () => {
         const cueContent = document.querySelector('.cue-column .content').innerHTML;
         const notesContent = document.querySelector('.notes-column .content').innerHTML;
         const summaryContent = document.querySelector('.summary-column .content').innerHTML;
+        const className = document.getElementById('className').value;
+        const lessonTopic = document.getElementById('lessonTopic').value;
+        const noteDate = document.getElementById('noteDate').value;
 
         notePages[currentPage] = {
             cueColumn: cueContent,
             notesColumn: notesContent,
-            summaryColumn: summaryContent
+            summaryColumn: summaryContent,
+            metadata: {
+                className,
+                lessonTopic,
+                noteDate
+            }
         };
     }
 
@@ -35,6 +43,14 @@ document.addEventListener('DOMContentLoaded', () => {
         document.querySelector('.cue-column .content').innerHTML = page.cueColumn;
         document.querySelector('.notes-column .content').innerHTML = page.notesColumn;
         document.querySelector('.summary-column .content').innerHTML = page.summaryColumn;
+        
+        // Load metadata
+        if (page.metadata) {
+            document.getElementById('className').value = page.metadata.className || '';
+            document.getElementById('lessonTopic').value = page.metadata.lessonTopic || '';
+            document.getElementById('noteDate').value = page.metadata.noteDate || '';
+        }
+        
         pageNumberSpan.textContent = `Page ${pageIndex + 1}`;
         
         // Update navigation buttons
@@ -48,7 +64,11 @@ document.addEventListener('DOMContentLoaded', () => {
         notePages.push({
             cueColumn: '',
             notesColumn: '',
-            summaryColumn: ''
+            summaryColumn: '',
+            metadata: {
+                className: '',
+                lessonTopic: '',
+                noteDate: new Date().toISOString().split('T')[0]
         });
         currentPage = notePages.length - 1;
         loadPage(currentPage);
