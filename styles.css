@@ -38,13 +38,26 @@ button {
     transition: all 0.2s ease;
 }
 
-#newPageBtn {
+.button-group {
+    display: flex;
+    gap: 1rem;
+}
+
+#newPageBtn, #downloadBtn {
     background-color: #3498db;
     color: white;
 }
 
-#newPageBtn:hover {
+#newPageBtn:hover, #downloadBtn:hover {
     background-color: #2980b9;
+}
+
+#downloadBtn {
+    background-color: #27ae60;
+}
+
+#downloadBtn:hover {
+    background-color: #219a52;
 }
 
 .page-navigation button {
@@ -62,13 +75,12 @@ button {
     display: grid;
     grid-template-columns: minmax(200px, 2.5fr) minmax(480px, 6fr);
     grid-template-rows: auto 1fr auto;
-    gap: 1px;
+    gap: 1rem;
     background-color: white;
     margin: 0;
-    min-height: calc(100vh - 4rem);
-    overflow-y: auto;
-    overflow-x: hidden;
+    height: calc(100vh - 4rem);
     padding: 1rem 2rem;
+    box-sizing: border-box;
 }
 
 .note-metadata {
